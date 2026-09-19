@@ -1,3 +1,13 @@
 .env
+.env.*
+!.env.example
 .venv/
 __pycache__/
+.runtime/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+*.egg-info/
+dist/
+.specify/feature.json
+.DS_Store
