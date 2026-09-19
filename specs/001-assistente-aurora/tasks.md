@@ -18,8 +18,8 @@
 - [x] T012 [US3] Implementar especialista regulamento em src/aurora/agents.py.
 ## Phase 6: Validation
 - [x] T013 Documentar arquitetura/garantias/comandos/evidências em README.md e docs/validacao.md.
-- [ ] T014 Verificar hashes de dados/ e testes em clone limpo; registrar docs/clone-limpo.json.
-- [ ] T015 Revisar convergência e diff antes de commit/push feature.
+- [x] T014 Verificar hashes de dados/ e testes em clone limpo; registrar docs/clone-limpo.json.
+- [x] T015 Revisar convergência e diff antes de commit/push feature.
 ## Dependencies & Execution Order
 Setup → Foundation → US1 → US2 → US3 → Validation. Casos de testes podem ser executados
 independentemente; implementação usa um único agente por restrição de coordenação.

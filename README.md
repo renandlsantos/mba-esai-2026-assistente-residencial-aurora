@@ -63,7 +63,7 @@ não são ferramentas dos agentes. Autenticação está fora do escopo.
 
 Reservas gratuitas e cancelamentos próprios não exigem aprovação. Reservas pagas e visitantes
 aguardam a decisão; texto “confirmo” não é resposta de sistema. Enquanto houver pendência, nova
-mensagem apenas devolve essa pendência. IDs desconhecidos, alheios ou já respondidos retornam409.
+mensagem apenas devolve essa pendência. IDs desconhecidos, alheios ou já respondidos retornam 409.
 Códigos usam UUID; cancelamento é lógico, preservando o código histórico. Operações já aplicadas
 são idempotentes por sessão/chamada. Disponibilidade nunca retorna unidade ou código de terceiros.
 
@@ -72,12 +72,12 @@ são locais, enquanto a exclusividade das reservas reside no banco. Não há tra
 entre os dois bancos nem garantia de conclusão após crash no meio de uma aprovação. A decisão
 é consumida antes de retomar o Runner: se houver falha nesse intervalo, inspecione eventos e dados;
 não reenvie a mesma confirmação esperando nova execução. Falhas de modelo propagam erro, nunca
-sucesso fictício. A falta de configuração retorna503 antes de consumir uma decisão.
+sucesso fictício. A falta de configuração retorna 503 antes de consumir uma decisão.
 
 As fontes públicas `dados/` estão intactas; [hashes](docs/upstream-integrity.json) são testados.
 [`docs/validacao.md`](docs/validacao.md) detalha a cobertura e as pendências externas.
 O SDD está em [`specs/001-assistente-aurora/`](specs/001-assistente-aurora/), governado pela
-[constituição](.specify/memory/constitution.md). Spec Kit oficial1.0.8.
+[constituição](.specify/memory/constitution.md). Spec Kit oficial 1.0.8.
 
 Conceitos consultados no acervo local, sem publicar transcrições:
 [Aprovando Execução de Tools](https://plataforma.fullcycle.com.br/courses/a091b0fe-a5c6-4287-a3d3-1ec61defcfd3/413/224/290/conteudos?capitulo=290&conteudo=18102),
@@ -88,7 +88,7 @@ A limitação descrita na aula foi tratada com teste na versão fixada, não pre
 
 ## Como rodar
 
-Requisitos: Python3.12 ou3.13 e [uv](https://docs.astral.sh/uv/). Na raiz do clone:
+Requisitos: Python 3.12 ou 3.13 e [uv](https://docs.astral.sh/uv/). Na raiz do clone:
 
 ```bash
 uv sync --frozen --no-editable
@@ -99,12 +99,12 @@ uv run --no-editable aurora start
 ```
 
 O `--no-editable` também evita que o iCloud marque o `.pth` editável como oculto, o que faz
-Python3.12 ignorar o caminho do pacote. Após mudar código local, use
+Python 3.12 ignorar o caminho do pacote. Após mudar código local, use
 `uv sync --frozen --no-editable --reinstall-package assistente-residencial-aurora`.
 
 `.env.example` contém somente nomes, sem valores. `.env` é ignorado. Escolha um modelo Gemini
 habilitado em sua conta no [catálogo oficial](https://ai.google.dev/gemini-api/docs/models).
-Nenhuma quota ou gratuidade é assumida; a aplicação pode fazer até15 chamadas de modelo por
+Nenhuma quota ou gratuidade é assumida; a aplicação pode fazer até 15 chamadas de modelo por
 invocação. A chave é usada exclusivamente pelo SDK em execução local. Não há modelo falso em produção.
 
 O servidor escuta exclusivamente `http://127.0.0.1:8000`; contrato interativo em `/docs`.
@@ -129,7 +129,7 @@ uv run --no-editable pytest -q
 
 Os testes de HTTP abrem apenas processos próprios em portas efêmeras e os encerram ao terminar.
 As chamadas do modelo de teste são roteirizadas: comprovam código/ADK/SQL, não interpretação de
-linguagem natural do Gemini. Rodar os15 passos do avaliador com Gemini e registrar seus resultados
+linguagem natural do Gemini. Rodar os 15 passos do avaliador com Gemini e registrar seus resultados
 continua pendente de credenciais e execução real. Referências técnicas:
 [confirmação nativa ADK](https://adk.dev/tools-custom/confirmation/),
 [Google ADK no PyPI](https://pypi.org/project/google-adk/2.9.2/).

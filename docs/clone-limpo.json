@@ -1,0 +1,34 @@
+{
+  "commit": "706dcdc648513a55c0afda9cc464d3e8d166b7c7",
+  "date": "2026-09-19",
+  "source": "remote feature branch",
+  "results": [
+    {
+      "command": "git clone --branch feature/sdd-fase-309 --single-branch https://github.com/renandlsantos/mba-esai-2026-assistente-residencial-aurora.git <temporary-clone>",
+      "returncode": 0,
+      "output": "Cloning into '<clone>'...\n"
+    },
+    {
+      "command": "uv sync --frozen --no-editable",
+      "returncode": 0,
+      "output": "Using CPython 3.12.14\nCreating virtual environment at: .venv\n   Building assistente-residencial-aurora @ file:///private<clone>\n      Built assistente-residencial-aurora @ file:///private<clone>\nPrepared 1 package in 210ms\nInstalled 56 packages in 54ms\n + aiosqlite==0.22.1\n + annotated-doc==0.0.5\n + annotated-types==0.8.0\n + anyio==4.15.1\n + assistente-residencial-aurora==0.1.0 (from file:///private<clone>)\n + attrs==26.1.0\n + authlib==1.8.0\n + certifi==2026.7.22\n + cffi==2.1.1\n + charset-normalizer==3.5.1\n + click==8.5.0\n + cryptography==50.0.1\n + distro==1.9.0\n + fastapi==0.141.1\n + google-adk==2.9.2\n + google-auth==2.58.0\n + google-genai==2.24.0\n + graphviz==0.21\n + greenlet==3.5.6\n + h11==0.16.0\n + httpcore==1.0.9\n + httpx==0.28.1\n + idna==3.20\n + iniconfig==2.3.0\n + joserfc==1.7.5\n + jsonschema==4.26.0\n + jsonschema-specifications==2025.9.1\n + opentelemetry-api==1.42.1\n + opentelemetry-sdk==1.42.1\n + opentelemetry-semantic-conventions==0.63b1\n + packaging==26.3\n + pluggy==1.6.0\n + pyasn1==0.6.4\n + pyasn1-modules==0.4.2\n + pycparser==3.0\n + pydantic==2.13.5\n + pydantic-core==2.46.5\n + pygments==2.21.0\n + pytest==9.0.3\n + pytest-asyncio==1.4.0\n + python-dotenv==1.2.2\n + python-multipart==0.0.32\n + pyyaml==6.0.3\n + referencing==0.37.0\n + requests==2.34.2\n + rpds-py==2026.6.3\n + sniffio==1.3.1\n + sqlalchemy==2.0.54\n + starlette==1.6.0\n + tenacity==9.1.4\n + typing-extensions==4.16.0\n + typing-inspection==0.4.4\n + urllib3==2.8.0\n + uvicorn==0.53.0\n + watchdog==6.0.0\n + websockets==15.0.1\n"
+    },
+    {
+      "command": "uv run --no-editable aurora restore",
+      "returncode": 0,
+      "output": "Restaurados exclusivamente .runtime/aurora/domain.sqlite3 e adk.sqlite3. Sessões removidas.\n"
+    },
+    {
+      "command": "uv run --no-editable pytest -q",
+      "returncode": 0,
+      "output": "..............                                                           [100%]\n=============================== warnings summary ===============================\n<frozen abc>:106\n  <frozen abc>:106: DeprecationWarning: BaseAgentConfig is deprecated and will be removed in future versions. Config is now loaded via reflection so the separate config class is no longer needed.\n\ntests/test_api.py::test_native_confirmation_restart_isolation\n  /private<clone>/.venv/lib/python3.12/site-packages/aurora/agents.py:176: UserWarning: [EXPERIMENTAL] ResumabilityConfig: This feature is experimental and may change or be removed in future versions without notice. It may introduce breaking changes at any time.\n    resumability_config=ResumabilityConfig(is_resumable=True),\n\ntests/test_api.py::test_native_confirmation_restart_isolation\n  /private<clone>/.venv/lib/python3.12/site-packages/google/adk/tools/transfer_to_agent_tool.py:106: UserWarning: [EXPERIMENTAL] feature FeatureName.JSON_SCHEMA_FOR_FUNC_DECL is enabled.\n    function_decl = super()._get_declaration()\n\ntests/test_api.py::test_native_confirmation_restart_isolation\n  /private<clone>/.venv/lib/python3.12/site-packages/google/adk/features/_feature_decorator.py:71: UserWarning: [EXPERIMENTAL] feature FeatureName.TOOL_CONFIRMATION is enabled.\n    check_feature_enabled()\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n14 passed, 4 warnings in 3.14s\n"
+    },
+    {
+      "command": "git status --porcelain",
+      "returncode": 0,
+      "output": ""
+    }
+  ],
+  "model": "offline scripted BaseLlm; no Gemini calls",
+  "clean_worktree": true
+}

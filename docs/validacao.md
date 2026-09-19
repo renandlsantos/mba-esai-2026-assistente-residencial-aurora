@@ -40,4 +40,11 @@ Portanto estes resultados não são resultados de interpretação de linguagem n
   retomada evitam declarar compatibilidade com versões diferentes.
 - Não garante crash no meio de aprovação nem coordenação de múltiplos workers (ver README).
 - Não houve merge em main nem submissão na plataforma; coordenador cuidará da entrega.
-- Clone remoto limpo será registrado em clone-limpo.json após publicação da implementação.
+- Clone remoto 706dcdc: instalação frozen, restore e 14 testes passaram; checkout limpo.
+  Evidência completa em [clone-limpo.json](clone-limpo.json).
+
+## Spec Kit converge
+Revisados 10 requisitos funcionais, 6 critérios mensuráveis, 8 cenários de aceite, 6 decisões
+de desenho e 5 princípios da constituição. Nenhuma lacuna de código identificada.
+Os 15 itens de implementação estão concluídos; a execução real do Gemini é dependência externa
+explicitamente separada pela especificação. Nenhuma fase vazia foi acrescentada a tasks.md.
