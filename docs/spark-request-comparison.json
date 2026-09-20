@@ -1,0 +1,13 @@
+{
+  "baseline": "35d434c",
+  "realModelCalls": 0,
+  "equalExceptTrustedIdentityInstruction": true,
+  "messageRoles": [
+    "system",
+    "user"
+  ],
+  "toolNames": [
+    "transfer_to_agent"
+  ],
+  "note": "Actual first-turn SDK/OpenAI-compatible payload captured offline, before/after context change; values and keys not recorded."
+}

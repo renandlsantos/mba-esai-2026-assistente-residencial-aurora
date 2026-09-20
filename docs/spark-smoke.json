@@ -1,0 +1,88 @@
+{
+  "provider": "spark",
+  "experimental": true,
+  "geminiAcceptance": "pending",
+  "passed": true,
+  "model": "spark/code",
+  "startedAt": "2026-09-20T13:52:50.575884+00:00",
+  "checks": [
+    {
+      "name": "message_http_200",
+      "passed": true
+    },
+    {
+      "name": "identity_response",
+      "passed": true
+    },
+    {
+      "name": "message_http_200",
+      "passed": true
+    },
+    {
+      "name": "free_without_confirmation",
+      "passed": true
+    },
+    {
+      "name": "message_http_200",
+      "passed": true
+    },
+    {
+      "name": "paid_pending",
+      "passed": true
+    },
+    {
+      "name": "paid_not_written",
+      "passed": true
+    },
+    {
+      "name": "other_session_409",
+      "passed": true
+    },
+    {
+      "name": "message_http_200",
+      "passed": true
+    },
+    {
+      "name": "chat_not_consent",
+      "passed": true
+    },
+    {
+      "name": "restart_events",
+      "passed": true
+    },
+    {
+      "name": "approved_http_200",
+      "passed": true
+    },
+    {
+      "name": "replay_409",
+      "passed": true
+    },
+    {
+      "name": "paid_exactly_once",
+      "passed": true
+    },
+    {
+      "name": "other_apartment_unchanged",
+      "passed": true
+    },
+    {
+      "name": "events_no_other_reservation",
+      "passed": true
+    }
+  ],
+  "toolCalls": [
+    "transfer_to_agent",
+    "minhas_reservas",
+    "disponibilidade",
+    "reservar_area",
+    "disponibilidade",
+    "listar_areas",
+    "disponibilidade",
+    "reservar_area",
+    "adk_request_confirmation"
+  ],
+  "eventCount": 29,
+  "llmCalls": 11,
+  "finishedAt": "2026-09-20T13:53:21.391096+00:00"
+}

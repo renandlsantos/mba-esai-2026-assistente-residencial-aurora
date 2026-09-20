@@ -1,0 +1,69 @@
+{
+  "createdAt": "2026-09-20T14:26:00.258011+00:00",
+  "commit": "06bc09d25ca870469b33ec81a4c55f5eaa247db2",
+  "realModelCalls": 0,
+  "port8000Available": true,
+  "boot": {
+    "host": "127.0.0.1",
+    "port": 8000,
+    "initialReservation": true,
+    "initialVisitor": true,
+    "sessionStatus": 201
+  },
+  "ownServerStopped": true,
+  "cloneGitStatus": "",
+  "passed": true,
+  "commands": [
+    {
+      "command": [
+        "uv",
+        "sync",
+        "--frozen",
+        "--offline",
+        "--no-editable"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--frozen",
+        "--no-editable",
+        "pytest",
+        "-q"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "uv",
+        "run",
+        "--frozen",
+        "--no-editable",
+        "aurora",
+        "restore"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--exit-code",
+        "--",
+        "dados/"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "tests": "24 passed, 4 warnings in 5.44s"
+}

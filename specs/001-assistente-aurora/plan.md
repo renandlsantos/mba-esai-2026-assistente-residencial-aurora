@@ -1,0 +1,49 @@
+# Implementation Plan: Assistente Aurora
+**Branch**: feature/sdd-fase-309 | **Date**: 2026-09-19 | **Spec**: [spec.md](spec.md)
+## Summary
+FastAPI expõe o contrato; Runner ADK persiste eventos em SQLite. Principal delega a especialistas
+em reservas, visitantes e regulamento. Ferramentas consultam apartamento por session_id no domínio.
+Confirmação usa protocolo nativo ADK e retomada da invocação original. SQL arbitra conflitos.
+## Technical Context
+Python >=3.12; google-adk==2.9.2; FastAPI; SQLite; uv.lock; pytest e modelo BaseLlm de teste.
+Serviço local de um processo, seis rotas, sem UI. Concorrência de sessões distintas suportada.
+Sem meta arbitrária de latência: custo do modelo externo domina. Testes offline não medem Gemini.
+## Constitution Check
+Todos os cinco princípios passam no desenho. Nenhuma exceção. Gate final exige testes de
+persistência, confirmação nativa, isolamento, UNIQUE, restore seguro e capítulos isolados.
+## Project Structure
+src/aurora/{config,store,agents,runtime,api,cli}.py; tests/{fake_model,test_api,test_store}.py;
+docs/validacao.md; specs/001-assistente-aurora/{research,data-model,quickstart,tasks}.md.
+## Complexity Tracking
+Dois bancos: domínio transacional e sessões ADK. Separação evita acoplamento ao schema privado
+ADK; apenas arquivos de nome fixo em diretório próprio são restaurados.
+
+## Extensão experimental — 2026-09-20
+
+Plano revisado antes de implementação em [spark-experimental.md](spark-experimental.md).
+Adicionar models.py para seleção explícita e spark.py para BaseLlm texto/tools via httpx;
+nenhuma mudança nas ferramentas de negócio ou no schema. httpx passa de dev para runtime,
+sem novos pacotes no lock. O requisito Gemini do enunciado é registrado; por decisão posterior do autor, T016 valida Spark.
+
+## Mudança de preferência do autor
+
+Alterar apenas o default de configured_model, atualizar testes de seleção e erro503 isolado,
+README/.env.example e governança. Preservar adapter e regras já testados. Rodar suíte inteira
+e verificar diff antes de publicar na mesma feature; não realizar merge ou submissão.
+
+## Correção após fluxo real — 2026-09-20
+
+O histórico completo permitiu resposta operacional sem nova consulta. Usar contexto do turno
+atual via include_contents e fornecer identidade confiável pelo callback público do ADK;
+preservar eventos e retomada nativa. Validar remoção de valores antigos após mudança no banco,
+suíte de consentimento/concorrência e rerun real focado. Escopo mínimo: configuração de agentes,
+regressão e harness/evidências. Não reescrever o enunciado nem converter erro do backend em sucesso.
+
+## Validação final — 2026-09-20
+
+Código de produção de 06bc09d, HEAD testado 1484b81, sem alteração de implementação nesta
+retomada. Roteiro integral real: 44 chamadas/125 checks; direcionado: 12 chamadas/64 checks.
+24 testes offline passaram novamente. Revisão dos eventos confirmou nova consulta de reservas
+após reinício, capítulo pertinente e consentimento persistido. O histórico permanece auditável,
+mas referências vagas a turnos anteriores exigem esclarecimento. T016 concluído para Spark,
+sem alegação de aceite institucional da divergência de provedor.
