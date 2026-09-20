@@ -9,9 +9,9 @@ usam ADK real com modelo roteirizado somente nos testes; há também smoke com S
 **Decisão de implementação:** Spark substitui Gemini como padrão por solicitação do autor.
 O enunciado original exige Gemini; essa é uma divergência documentada, sem alegação de
 aprovação da instituição. A alternativa Gemini permanece selecionável explicitamente.
-O roteiro de 15 passos foi executado com Spark; a revisão revelou leitura pelo histórico,
-agora corrigida e coberta por regressão offline. A revalidação real direcionada está pendente
-após HTTP 500 do backend Spark. [Resultado e limites](docs/spark-validation.md).
+O roteiro de 15 passos passou no código atual com Spark: 44 chamadas reais e 125 verificações.
+A correção de leitura pelo histórico também passou em teste real direcionado: 12 chamadas e
+64 verificações. [Evidências, diferença acadêmica e limites](docs/spark-validation-final.md).
 
 ## Arquitetura
 
@@ -145,9 +145,9 @@ uv run --no-editable pytest -q
 
 Os testes de HTTP abrem apenas processos próprios em portas efêmeras e os encerram ao terminar.
 As chamadas do modelo de teste são roteirizadas: comprovam código/ADK/SQL, não interpretação de
-linguagem natural. A rodada inicial Spark teve 41 chamadas e 109 checks positivos, mas revelou
-uma leitura de reservas pelo histórico. A correção passou em 24 testes; sua revalidação real
-está pendente por HTTP 500 do Spark. [Evidências](docs/spark-validation.md).
+linguagem natural. A rodada Spark atual passou nos 15 passos, com 44 chamadas e 125 checks;
+a regressão real de contexto passou em 12 chamadas e 64 checks. A suíte local tem 24 testes
+aprovados. [Evidências atuais e histórico preservado](docs/spark-validation-final.md).
 A diferença em relação ao provedor exigido no enunciado permanece declarada. Referências técnicas:
 [confirmação nativa ADK](https://adk.dev/tools-custom/confirmation/),
 [Google ADK no PyPI](https://pypi.org/project/google-adk/2.9.2/).
@@ -184,4 +184,4 @@ AURORA_MODEL_PROVIDER=spark uv run --no-editable python scripts/smoke_spark.py \
 Em 20/09/2026, o smoke passou com **11 chamadas reais**, reserva gratuita, cobrança pendente,
 aprovação após reinicializar o runtime, replay 409 e isolamento. [Evidência](docs/spark-smoke.json)
 e [limites do experimento](docs/spark-experimental.md). A validação posterior está em
-[spark-validation.md](docs/spark-validation.md); T016 permanece aberto para a correção ainda sem rerun real concluído.
+[spark-validation-final.md](docs/spark-validation-final.md); T016 está concluído para o provedor Spark escolhido pelo autor.

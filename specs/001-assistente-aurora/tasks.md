@@ -32,14 +32,15 @@ cenários críticos devem usar SQLite real. Testes de modelo falso não validam 
 Os itens anteriores comprovam implementação e execução offline. A entrega acadêmica continua
 separada da validação funcional: o provedor escolhido diverge do enunciado original.
 
-- [ ] T016 Executar os 15 passos funcionais do avaliador com Spark real, conforme preferência do autor; registrar modelo, resultados e eventos sem segredos. A divergência do requisito Gemini deve permanecer declarada.
-  Rodada integral: 41 chamadas/109 checks; revisão identificou leitura pelo histórico na etapa13.
-  Correção offline validada; rerun direcionado bloqueado por HTTP500 do Spark. Evidência e
-  próximos comandos: [validação](../../docs/spark-validation.md). Não fechar por checks parciais.
+- [x] T016 Executar os 15 passos funcionais do avaliador com Spark real, conforme preferência do autor; registrar modelo, resultados e eventos sem segredos. A divergência do requisito Gemini deve permanecer declarada.
+  Nova rodada integral no código atual: 44 chamadas/125 checks aprovados; regressão real
+  direcionada: 12 chamadas/64 checks aprovados. 24 testes offline passaram novamente.
+  A rodada anterior de 109 checks e seu achado permanecem registrados, sem serem usados como
+  prova do código corrigido. [Validação final](../../docs/spark-validation-final.md).
 
 ## Phase 8: Optional local development provider
 
-- [x] T017 Especificar e implementar Spark experimental conforme [spark-experimental.md](spark-experimental.md), inicialmente mantendo Gemini default; decisão posterior T019 altera o padrão e mantém T016 aberto.
+- [x] T017 Especificar e implementar Spark experimental conforme [spark-experimental.md](spark-experimental.md), inicialmente mantendo Gemini default; decisão posterior T019 alterou o padrão. Naquela etapa T016 ainda estava aberto.
 - [x] T018 Validar adapter via transporte HTTP de teste com ADK/SQLite reais e smoke Spark autorizado em bases temporárias; registrar docs/spark-smoke.json.
 
 - [x] T019 Tornar Spark o padrão, documentar preferência/divergência e testar seleção ausente/vazia, alternativa Gemini e falta de configuração sem fallback.

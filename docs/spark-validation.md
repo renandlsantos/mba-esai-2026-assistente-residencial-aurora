@@ -1,4 +1,8 @@
-# Roteiro funcional Spark e correção de contexto — 20/09/2026
+# Roteiro funcional Spark e correção de contexto — registro inicial de 20/09/2026
+
+> Registro histórico do achado e do bloqueio temporário. A retomada posterior passou no
+> código corrigido: [validação final](spark-validation-final.md). Os resultados abaixo não
+> são usados como prova do novo código e foram preservados sem substituir os snapshots.
 
 O roteiro de 15 passos foi executado com `spark/code`, API HTTP, Google ADK 2.9.2
 e SQLite reais, em cópias temporárias dos dados públicos. A rodada inicial passou

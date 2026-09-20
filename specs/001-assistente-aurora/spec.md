@@ -75,11 +75,12 @@ Chave e disponibilidade Spark pertencem ao ambiente do operador. Testes offline 
 garantias usando modelo de teste explícito; testes reais usam a configuração autorizada.
 
 O modo adicional FR-011 e seus testes estão em [spark-experimental.md](spark-experimental.md).
-Seu smoke usa linguagem natural real, mas não conclui todo o roteiro T016.
+Seu smoke histórico cobre parte do roteiro. A execução completa posterior de T016 está em
+[spark-validation-final.md](../../docs/spark-validation-final.md).
 
 
 ## Decisão do autor — Spark preferido
 
 Spark passa a ser padrão para provedor ausente/vazio. Gemini exige seleção explícita.
-O roteiro funcional completo será executado com Spark (T016); isso não altera o enunciado
+O roteiro funcional completo foi executado com Spark (T016); isso não altera o enunciado
 original nem prova aceite institucional da troca de provedor.

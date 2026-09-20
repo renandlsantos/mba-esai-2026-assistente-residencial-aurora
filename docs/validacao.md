@@ -69,5 +69,13 @@ reinicializado antes da aprovação. Ver [registro completo](spark-experimental.
 A decisão posterior do autor tornou Spark padrão, com divergência explícita do requisito Gemini.
 A rodada de 15 etapas executou 41 chamadas reais e 109 checks; a revisão dos eventos identificou
 leitura de reservas pelo histórico na etapa13. A correção passou em 24 testes offline, mas a
-verificação real direcionada foi interrompida por HTTP500 do backend Spark. T016 permanece aberto.
+verificação real direcionada foi interrompida por HTTP500 do backend Spark. T016 estava aberto nessa etapa.
 Ver [relatório, evidências preservadas e reprodução](spark-validation.md).
+
+## Fechamento funcional Spark — 2026-09-20, 14:53 UTC
+
+Nova rodada integral no código atual passou: 15 etapas, 44 chamadas reais e 125 checks.
+A regressão real direcionada também passou: 12 chamadas e 64 checks, incluindo visitante
+pendente aprovado após reinício de processo e leitura atualizada após mudança no banco.
+24 testes offline passaram novamente. T016 concluído para Spark; Gemini e aceite institucional
+não foram presumidos. [Evidências, proveniência e tradeoff de contexto](spark-validation-final.md).

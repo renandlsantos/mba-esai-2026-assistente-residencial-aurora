@@ -38,3 +38,12 @@ atual via include_contents e fornecer identidade confiável pelo callback públi
 preservar eventos e retomada nativa. Validar remoção de valores antigos após mudança no banco,
 suíte de consentimento/concorrência e rerun real focado. Escopo mínimo: configuração de agentes,
 regressão e harness/evidências. Não reescrever o enunciado nem converter erro do backend em sucesso.
+
+## Validação final — 2026-09-20
+
+Código de produção de 06bc09d, HEAD testado 1484b81, sem alteração de implementação nesta
+retomada. Roteiro integral real: 44 chamadas/125 checks; direcionado: 12 chamadas/64 checks.
+24 testes offline passaram novamente. Revisão dos eventos confirmou nova consulta de reservas
+após reinício, capítulo pertinente e consentimento persistido. O histórico permanece auditável,
+mas referências vagas a turnos anteriores exigem esclarecimento. T016 concluído para Spark,
+sem alegação de aceite institucional da divergência de provedor.

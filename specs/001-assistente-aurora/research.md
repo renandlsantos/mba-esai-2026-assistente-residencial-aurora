@@ -8,7 +8,9 @@ Fontes: https://adk.dev/tools-custom/confirmation/ e https://pypi.org/project/go
 ## Modelo
 Gemini configurável via GEMINI_MODEL e GOOGLE_API_KEY. Catálogo oficial consultado:
 https://ai.google.dev/gemini-api/docs/models . Sem assumir quotas/disponibilidade da conta.
-Fake BaseLlm apenas nos testes; execução real pendente de credencial autorizada.
+Fake BaseLlm apenas nos testes; naquela pesquisa inicial a execução real estava pendente.
+A decisão posterior do autor adotou Spark, com [validação funcional real concluída](../../docs/spark-validation-final.md)
+e divergência do requisito Gemini documentada.
 ## Banco
 SQLite com índice UNIQUE parcial de reserva ativa, códigos UUID e cancelamento lógico.
 Alternativa rejeitada: consultar disponibilidade e inserir sem restrição de banco.
