@@ -48,3 +48,11 @@ Revisados 10 requisitos funcionais, 6 critérios mensuráveis, 8 cenários de ac
 de desenho e 5 princípios da constituição. Nenhuma lacuna de código identificada.
 Os 15 itens de implementação estão concluídos; a execução real do Gemini é dependência externa
 explicitamente separada pela especificação. Nenhuma fase vazia foi acrescentada a tasks.md.
+
+## Revalidação local — 2026-09-20
+
+14 testes passaram novamente, incluindo reinício HTTP real e concorrência SQL. O comando
+de restore foi executado em diretório temporário exclusivo, seguido de aurora start em
+127.0.0.1:8000: dados iniciais do 101 e visitante do 302 corretos, criação de sessão HTTP 201.
+Nenhuma chamada de modelo real foi feita. Arquivos dados/ idênticos ao upstream be87e1d.
+A tarefa externa T016 torna explícita a pendência dos 15 passos com Gemini antes da liberação.

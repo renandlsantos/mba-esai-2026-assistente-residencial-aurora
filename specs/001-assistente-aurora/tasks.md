@@ -26,3 +26,10 @@ independentemente; implementação usa um único agente por restrição de coord
 ## Implementation Strategy
 Primeiro validar consentimento persistido no SDK; depois acrescentar domínio e API. Todos os
 cenários críticos devem usar SQLite real. Testes de modelo falso não validam a qualidade Gemini.
+
+## Phase 7: External acceptance validation
+
+Os itens anteriores comprovam implementação e execução offline. A entrega acadêmica continua
+pendente até executar o fluxo de linguagem natural com o provedor real.
+
+- [ ] T016 Executar os 15 passos do avaliador com Gemini real e credenciais locais autorizadas; registrar modelo, resultados e eventos verificáveis em docs/validacao-gemini.md sem segredos.
