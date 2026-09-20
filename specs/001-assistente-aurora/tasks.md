@@ -25,16 +25,18 @@ Setup → Foundation → US1 → US2 → US3 → Validation. Casos de testes pod
 independentemente; implementação usa um único agente por restrição de coordenação.
 ## Implementation Strategy
 Primeiro validar consentimento persistido no SDK; depois acrescentar domínio e API. Todos os
-cenários críticos devem usar SQLite real. Testes de modelo falso não validam a qualidade Gemini.
+cenários críticos devem usar SQLite real. Testes de modelo falso não validam a qualidade de um modelo real.
 
 ## Phase 7: External acceptance validation
 
 Os itens anteriores comprovam implementação e execução offline. A entrega acadêmica continua
 pendente até executar o fluxo de linguagem natural com o provedor real.
 
-- [ ] T016 Executar os 15 passos do avaliador com Gemini real e credenciais locais autorizadas; registrar modelo, resultados e eventos verificáveis em docs/validacao-gemini.md sem segredos.
+- [ ] T016 Executar os 15 passos funcionais do avaliador com Spark real, conforme preferência do autor; registrar modelo, resultados e eventos sem segredos. A divergência do requisito Gemini deve permanecer declarada.
 
 ## Phase 8: Optional local development provider
 
-- [x] T017 Especificar e implementar Spark experimental conforme [spark-experimental.md](spark-experimental.md), mantendo Gemini default e T016 aberto.
+- [x] T017 Especificar e implementar Spark experimental conforme [spark-experimental.md](spark-experimental.md), inicialmente mantendo Gemini default; decisão posterior T019 altera o padrão e mantém T016 aberto.
 - [x] T018 Validar adapter via transporte HTTP de teste com ADK/SQLite reais e smoke Spark autorizado em bases temporárias; registrar docs/spark-smoke.json.
+
+- [x] T019 Tornar Spark o padrão, documentar preferência/divergência e testar seleção ausente/vazia, alternativa Gemini e falta de configuração sem fallback.

@@ -1,5 +1,10 @@
 # Spark experimental — especificação e plano
 
+> Registro histórico da integração inicial. Decisão posterior do autor: Spark é agora o
+> padrão. Gemini é alternativa explícita; a exigência original permanece como divergência
+> declarada. T016 acompanha os 15 passos funcionais ainda pendentes com Spark.
+
+
 Data: 2026-09-20. Escopo autorizado pelo usuário via coordenador; revisão do plano anterior à implementação.
 
 ## Constituição e requisito

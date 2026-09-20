@@ -1,10 +1,15 @@
 # Assistente Residencial Aurora
 
 Desafio 309 do MBA em Engenharia de Software com IA. API local com Google ADK 2.9.2,
-Gemini configurável e dados persistentes. O consentimento e as regras de negócio são
-verificados em código. **Testes offline usam ADK real e modelo roteirizado somente nos testes;
-a execução com Gemini real ainda não foi realizada.** Spark local é uma opção experimental
-de desenvolvimento, validada separadamente; não substitui o Gemini exigido pelo enunciado.
+Spark local como provedor padrão e dados persistentes. A preferência do autor é executar
+modelos locais por controle operacional e independência de chaves de geração na nuvem.
+O consentimento e as regras de negócio continuam verificados em código. Os testes offline
+usam ADK real com modelo roteirizado somente nos testes; há também smoke com Spark real.
+
+**Decisão de implementação:** Spark substitui Gemini como padrão por solicitação do autor.
+O enunciado original exige Gemini; essa é uma divergência documentada, sem alegação de
+aprovação da instituição. A alternativa Gemini permanece selecionável explicitamente.
+Ainda falta executar o roteiro completo de 15 passos com Spark; o smoke realizado é parcial.
 
 ## Arquitetura
 
@@ -95,7 +100,7 @@ Requisitos: Python 3.12 ou 3.13 e [uv](https://docs.astral.sh/uv/). Na raiz do c
 uv sync --frozen --no-editable
 uv run --no-editable aurora restore
 cp .env.example .env
-# Edite .env localmente: GOOGLE_API_KEY e GEMINI_MODEL.
+# O Spark lê a credencial externa; ajuste SPARK_ENV_FILE se necessário.
 uv run --no-editable aurora start
 ```
 
@@ -103,10 +108,14 @@ O `--no-editable` também evita que o iCloud marque o `.pth` editável como ocul
 Python 3.12 ignorar o caminho do pacote. Após mudar código local, use
 `uv sync --frozen --no-editable --reinstall-package assistente-residencial-aurora`.
 
-`.env.example` contém somente nomes, sem valores. `.env` é ignorado. Escolha um modelo Gemini
-habilitado em sua conta no [catálogo oficial](https://ai.google.dev/gemini-api/docs/models).
-Nenhuma quota ou gratuidade é assumida; a aplicação pode fazer até 15 chamadas de modelo por
-invocação. A chave é usada exclusivamente pelo SDK em execução local. Não há modelo falso em produção.
+`.env.example` contém apenas configuração não secreta e campos vazios de credenciais.
+A chave permanece no arquivo externo; `.env` é ignorado pelo Git. O padrão usa `spark/code`
+com timeout de 300 segundos e 4096 tokens. Ausência de configuração gera erro explícito,
+sem resposta fictícia nem fallback para nuvem.
+
+Para selecionar Gemini opcionalmente, configure `AURORA_MODEL_PROVIDER=gemini`,
+`GOOGLE_API_KEY` e `GEMINI_MODEL` no ambiente local. Essa alternativa foi preservada,
+mas não é o caminho preferido nem foi avaliada com modelo real nesta entrega.
 
 O servidor escuta exclusivamente `http://127.0.0.1:8000`; contrato interativo em `/docs`.
 Exemplo de criação:
@@ -130,18 +139,18 @@ uv run --no-editable pytest -q
 
 Os testes de HTTP abrem apenas processos próprios em portas efêmeras e os encerram ao terminar.
 As chamadas do modelo de teste são roteirizadas: comprovam código/ADK/SQL, não interpretação de
-linguagem natural do Gemini. Rodar os 15 passos do avaliador com Gemini e registrar seus resultados
-continua pendente de credenciais e execução real. Referências técnicas:
+linguagem natural. Rodar os 15 passos do avaliador com Spark e registrar seus resultados
+continua pendente. A diferença em relação ao provedor exigido no enunciado permanece declarada. Referências técnicas:
 [confirmação nativa ADK](https://adk.dev/tools-custom/confirmation/),
 [Google ADK no PyPI](https://pypi.org/project/google-adk/2.9.2/).
 
-### Spark local experimental
+### Modelos locais preferidos: Spark
 
-O padrão continua Gemini quando `AURORA_MODEL_PROVIDER` está ausente ou vazio. Para usar
-explicitamente o servidor Spark local configurado em seu ambiente:
+O padrão é Spark quando `AURORA_MODEL_PROVIDER` está ausente, vazio ou definido como `spark`.
+Com ambiente e dados inicializados, execute:
 
 ```bash
-AURORA_MODEL_PROVIDER=spark uv run --no-editable aurora start
+uv run --no-editable aurora start
 ```
 
 Somente nesse modo, `SPARK_BASE_URL` e `SPARK_API_KEY` são lidos do ambiente ou de
@@ -166,4 +175,4 @@ AURORA_MODEL_PROVIDER=spark uv run --no-editable python scripts/smoke_spark.py \
 
 Em 20/09/2026, o smoke passou com **11 chamadas reais**, reserva gratuita, cobrança pendente,
 aprovação após reinicializar o runtime, replay 409 e isolamento. [Evidência](docs/spark-smoke.json)
-e [limites do experimento](docs/spark-experimental.md). O aceite Gemini permanece pendente em T016.
+e [limites do experimento](docs/spark-experimental.md). O roteiro completo Spark permanece pendente em T016.

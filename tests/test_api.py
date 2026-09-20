@@ -188,6 +188,10 @@ async def test_occupied_area_never_exposes_owner(settings):
 
 
 async def test_contract_errors_and_no_production_fake(settings, monkeypatch):
+    monkeypatch.delenv("AURORA_MODEL_PROVIDER", raising=False)
+    monkeypatch.delenv("SPARK_BASE_URL", raising=False)
+    monkeypatch.delenv("SPARK_API_KEY", raising=False)
+    monkeypatch.setenv("SPARK_ENV_FILE", str(settings.root / "missing-spark.env"))
     monkeypatch.delenv("GOOGLE_API_KEY", raising=False)
     monkeypatch.delenv("GEMINI_MODEL", raising=False)
     app = create_app(settings)

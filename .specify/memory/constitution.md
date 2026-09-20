@@ -19,10 +19,11 @@ Regulamento retorna somente um capítulo pertinente. Os arquivos dados/ são fon
 Restore opera exclusivamente nos bancos pertencentes a esta aplicação.
 
 ### V. Evidência honesta
-Testes offline usam o ADK real com modelo explicitamente injetado nos testes. Gemini é o padrão
-e o provedor obrigatório do aceite acadêmico. Spark local é permitido somente como opção
-experimental explícita de desenvolvimento; suas evidências não substituem Gemini. Ausência de
-credenciais não produz resposta fictícia nem troca silenciosa de provedor.
+Testes offline usam o ADK real com modelo explicitamente injetado nos testes. Spark local é
+preferido e padrão por decisão do autor; Gemini é uma alternativa explícita. O enunciado exige
+Gemini: manter essa divergência visível sem alegar aprovação acadêmica. Evidência parcial Spark
+não equivale aos 15 passos completos. Ausência de credenciais não produz resposta fictícia
+nem troca silenciosa de provedor.
 
 ## Technical Constraints
 Python >=3.12, uv.lock versionado, Google ADK série 2 com versão exata >=2.2.0.
@@ -38,7 +39,12 @@ Mudanças exigem justificativa e revisão de impacto nos critérios de aceite. A
 incrementam major; princípios adicionais, minor; esclarecimentos, patch. Revisão final verifica
 cada princípio contra implementação e evidências.
 
-**Version**: 1.1.0 | **Ratified**: 2026-09-19 | **Last Amended**: 2026-09-20
+**Version**: 2.0.0 | **Ratified**: 2026-09-19 | **Last Amended**: 2026-09-20
 
 Emenda 1.1.0: opção Spark solicitada pelo usuário e autorizada pelo coordenador. Preserva todos
 os critérios acadêmicos; plano e limites em specs/001-assistente-aurora/spark-experimental.md.
+
+
+Emenda 2.0.0: o autor solicitou Spark como padrão, substituindo o default Gemini da emenda1.1.0.
+Contrato HTTP, dados, garantias e opção Gemini são preservados. A divergência acadêmica é
+explicitamente documentada; nenhum teste é marcado aprovado por essa mudança de preferência.

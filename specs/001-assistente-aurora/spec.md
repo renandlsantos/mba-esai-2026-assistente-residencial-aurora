@@ -50,8 +50,9 @@ Falhas externas de modelo são explícitas, sem respostas simuladas.
 - FR-008: Manter dados/ intacto e restauração reproduzível restrita aos bancos próprios.
 - FR-009: Principal e pelo menos dois especialistas devem operar via ferramentas.
 - FR-010: Documentar instalação limpa, arquitetura, garantias e limites de validação.
-- FR-011 (desenvolvimento opcional): aceitar Spark local somente por seleção explícita,
-  mantendo Gemini como padrão/aceite, o mesmo contrato e as mesmas garantias de domínio.
+- FR-011: usar Spark local como padrão por decisão do autor e preservar Gemini como alternativa
+  explícita, com o mesmo contrato e as mesmas garantias de domínio;
+  a divergência do requisito Gemini é documentada.
   Credenciais ficam fora de eventos/artefatos; resposta inválida não executa ferramentas.
 
 ### Key Entities
@@ -70,8 +71,15 @@ Evento: histórico ordenado da interação. Capítulo: trecho isolado do regulam
 
 ## Assumptions
 Autenticação, pagamentos reais, UI, deploy e horários/capacidade de reservas estão fora de escopo.
-Chave e disponibilidade Gemini pertencem ao ambiente do operador; execução real fica pendente
-até credenciais autorizadas. Testes offline verificam garantias usando modelo de teste explícito.
+Chave e disponibilidade Spark pertencem ao ambiente do operador. Testes offline verificam
+garantias usando modelo de teste explícito; testes reais usam a configuração autorizada.
 
 O modo adicional FR-011 e seus testes estão em [spark-experimental.md](spark-experimental.md).
-Seu smoke usa linguagem natural real, mas não conclui SC-001–SC-006 com Gemini nem T016.
+Seu smoke usa linguagem natural real, mas não conclui todo o roteiro T016.
+
+
+## Decisão do autor — Spark preferido
+
+Spark passa a ser padrão para provedor ausente/vazio. Gemini exige seleção explícita.
+O roteiro funcional completo será executado com Spark (T016); isso não altera o enunciado
+original nem prova aceite institucional da troca de provedor.

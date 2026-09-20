@@ -23,4 +23,10 @@ ADK; apenas arquivos de nome fixo em diretório próprio são restaurados.
 Plano revisado antes de implementação em [spark-experimental.md](spark-experimental.md).
 Adicionar models.py para seleção explícita e spark.py para BaseLlm texto/tools via httpx;
 nenhuma mudança nas ferramentas de negócio ou no schema. httpx passa de dev para runtime,
-sem novos pacotes no lock. Gemini continua obrigatório para T016.
+sem novos pacotes no lock. O requisito Gemini do enunciado é registrado; por decisão posterior do autor, T016 valida Spark.
+
+## Mudança de preferência do autor
+
+Alterar apenas o default de configured_model, atualizar testes de seleção e erro503 isolado,
+README/.env.example e governança. Preservar adapter e regras já testados. Rodar suíte inteira
+e verificar diff antes de publicar na mesma feature; não realizar merge ou submissão.

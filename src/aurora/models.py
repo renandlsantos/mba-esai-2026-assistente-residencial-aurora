@@ -1,4 +1,4 @@
-"""Explicit model selection; Gemini remains the academic/default provider."""
+"""Explicit model selection; Spark is preferred; Gemini is an explicit alternative."""
 
 import os
 from pathlib import Path
@@ -12,7 +12,7 @@ class ModelConfigurationError(RuntimeError):
 
 
 def configured_model():
-    provider = os.getenv("AURORA_MODEL_PROVIDER") or "gemini"
+    provider = os.getenv("AURORA_MODEL_PROVIDER") or "spark"
     if provider == "gemini":
         model = os.getenv("GEMINI_MODEL")
         if not model or not os.getenv("GOOGLE_API_KEY"):

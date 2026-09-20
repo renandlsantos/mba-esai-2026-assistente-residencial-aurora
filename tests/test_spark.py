@@ -62,20 +62,21 @@ def test_model_selection_is_explicit_and_secrets_stay_out(monkeypatch, tmp_path)
         "SPARK_BASE_URL=http://localhost:9999/v1\nSPARK_API_KEY=private-test-key\n"
     )
     monkeypatch.setenv("SPARK_ENV_FILE", str(secret_file))
-    with pytest.raises(ModelConfigurationError, match="GOOGLE_API_KEY"):
-        configured_model()
-    monkeypatch.setenv("GOOGLE_API_KEY", "google-test")
-    monkeypatch.setenv("GEMINI_MODEL", "gemini-test")
-    assert configured_model() == "gemini-test"
-    monkeypatch.setenv("AURORA_MODEL_PROVIDER", "")
-    assert configured_model() == "gemini-test"
-    monkeypatch.setenv("AURORA_MODEL_PROVIDER", "spark")
     monkeypatch.delenv("SPARK_BASE_URL", raising=False)
     monkeypatch.delenv("SPARK_API_KEY", raising=False)
     model = configured_model()
     assert model.model == "spark/code"
     assert model.api_key.get_secret_value() == "private-test-key"
     assert "private-test-key" not in repr(model) + model.model_dump_json()
+    monkeypatch.setenv("AURORA_MODEL_PROVIDER", "")
+    assert isinstance(configured_model(), SparkModel)
+    monkeypatch.setenv("AURORA_MODEL_PROVIDER", "gemini")
+    with pytest.raises(ModelConfigurationError, match="GOOGLE_API_KEY"):
+        configured_model()
+    monkeypatch.setenv("GOOGLE_API_KEY", "google-test")
+    monkeypatch.setenv("GEMINI_MODEL", "gemini-test")
+    assert configured_model() == "gemini-test"
+    monkeypatch.setenv("AURORA_MODEL_PROVIDER", "spark")
     monkeypatch.setenv("SPARK_BASE_URL", "https://wrong.example/v1?key=secret")
     with pytest.raises(ModelConfigurationError, match="sem credenciais"):
         configured_model()

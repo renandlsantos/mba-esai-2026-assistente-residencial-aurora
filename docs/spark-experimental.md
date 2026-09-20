@@ -1,5 +1,10 @@
 # Spark local — modo experimental
 
+> Registro histórico da integração inicial. Decisão posterior do autor: Spark é agora o
+> padrão. Gemini é alternativa explícita; a exigência original permanece como divergência
+> declarada. T016 acompanha os 15 passos funcionais ainda pendentes com Spark.
+
+
 Data: 2026-09-20. O usuário autorizou o endpoint local e a leitura de seu dotenv por meio do
 coordenador. Nenhum valor de chave, URL privada ou arquivo dotenv foi copiado para os artefatos.
 
