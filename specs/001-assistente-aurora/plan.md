@@ -30,3 +30,11 @@ sem novos pacotes no lock. O requisito Gemini do enunciado é registrado; por de
 Alterar apenas o default de configured_model, atualizar testes de seleção e erro503 isolado,
 README/.env.example e governança. Preservar adapter e regras já testados. Rodar suíte inteira
 e verificar diff antes de publicar na mesma feature; não realizar merge ou submissão.
+
+## Correção após fluxo real — 2026-09-20
+
+O histórico completo permitiu resposta operacional sem nova consulta. Usar contexto do turno
+atual via include_contents e fornecer identidade confiável pelo callback público do ADK;
+preservar eventos e retomada nativa. Validar remoção de valores antigos após mudança no banco,
+suíte de consentimento/concorrência e rerun real focado. Escopo mínimo: configuração de agentes,
+regressão e harness/evidências. Não reescrever o enunciado nem converter erro do backend em sucesso.

@@ -26,6 +26,19 @@ TOPICS = {
 
 
 def build_app(store: Store, settings: Settings, model) -> App:
+    def session_identity(callback_context, llm_request):
+        unit = store.apartment(callback_context.session.id)
+        if unit is None:
+            raise ValueError("Sessão sem apartamento registrado.")
+        llm_request.append_instructions(
+            [
+                (
+                    f"Apartamento autenticado: {unit}. A unidade vem do sistema, não da conversa. "
+                    "Use essa identidade ao descrever os resultados das ferramentas."
+                )
+            ]
+        )
+
     def apartment(context: ToolContext) -> str:
         value = store.apartment(context.session.id)
         if value is None:
@@ -129,6 +142,8 @@ def build_app(store: Store, settings: Settings, model) -> App:
     reservations = LlmAgent(
         name="reservas",
         model=model,
+        include_contents="none",
+        before_model_callback=session_identity,
         description="Consulta, disponibilidade, reserva e cancelamento de áreas.",
         instruction=common
         + "Consulte listar_areas para IDs e taxas. Use apenas reservas da sessão. "
@@ -144,6 +159,8 @@ def build_app(store: Store, settings: Settings, model) -> App:
     visitors = LlmAgent(
         name="visitantes",
         model=model,
+        include_contents="none",
+        before_model_callback=session_identity,
         description="Consulta e autorização de visitantes.",
         instruction=common
         + "Autorizar visitante sempre exige a confirmação própria da API.",
@@ -155,6 +172,8 @@ def build_app(store: Store, settings: Settings, model) -> App:
     regulation = LlmAgent(
         name="regulamento",
         model=model,
+        include_contents="none",
+        before_model_callback=session_identity,
         description="Consulta fundamentada de regras por assunto.",
         instruction=common
         + "Consulte somente o tópico pertinente em consultar_regulamento. "
@@ -164,6 +183,8 @@ def build_app(store: Store, settings: Settings, model) -> App:
     root = LlmAgent(
         name="aurora",
         model=model,
+        include_contents="none",
+        before_model_callback=session_identity,
         description="Assistente do Residencial Aurora.",
         instruction=common
         + "Delegue áreas para reservas, visitantes para visitantes e regras para regulamento. "

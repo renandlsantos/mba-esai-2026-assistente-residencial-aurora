@@ -1,0 +1,33 @@
+{
+  "passed": false,
+  "provider": "spark",
+  "academicProviderDeviation": "Gemini required by statement; Spark chosen by author",
+  "institutionalAcceptance": "not_claimed",
+  "startedAt": "2026-09-20T14:20:14.569412+00:00",
+  "model": "spark/code",
+  "maxCalls": 20,
+  "scope": "context_regression",
+  "steps": [
+    {
+      "number": 1,
+      "name": "identity despite adversarial claim",
+      "checks": [
+        {
+          "name": "S1_created_201",
+          "passed": true
+        }
+      ],
+      "turns": []
+    }
+  ],
+  "processes": [
+    {
+      "pid": 80116,
+      "loopback": true,
+      "stopped": true
+    }
+  ],
+  "llmCalls": 1,
+  "finishedAt": "2026-09-20T14:20:18.993479+00:00",
+  "errorType": "JSONDecodeError"
+}

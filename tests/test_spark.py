@@ -191,8 +191,13 @@ async def test_http_adapter_transfer_consent_restart_and_identity(
     payloads = []
 
     def receive(request):
-        payloads.append(json.loads(request.content))
-        return httpx.Response(200, json=next(replies))
+        payload = json.loads(request.content)
+        payloads.append(payload)
+        reply = next(replies)
+        declared = {tool["function"]["name"] for tool in payload.get("tools", [])}
+        for call in reply["choices"][0]["message"].get("tool_calls", []):
+            assert call["function"]["name"] in declared, (len(payloads), declared)
+        return httpx.Response(200, json=reply)
 
     monkeypatch.setattr(
         spark,

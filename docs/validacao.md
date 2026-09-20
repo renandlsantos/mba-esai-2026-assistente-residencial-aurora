@@ -63,3 +63,11 @@ A tarefa externa T016 torna explícita a pendência dos 15 passos com Gemini ant
 Smoke real autorizado com spark/code passou em 11 chamadas, bancos temporários e runtime
 reinicializado antes da aprovação. Ver [registro completo](spark-experimental.md) e
 [resultado estruturado](spark-smoke.json). O teste não substitui os 15 passos com Gemini.
+
+## Fluxo Spark completo e achado de contexto — 2026-09-20
+
+A decisão posterior do autor tornou Spark padrão, com divergência explícita do requisito Gemini.
+A rodada de 15 etapas executou 41 chamadas reais e 109 checks; a revisão dos eventos identificou
+leitura de reservas pelo histórico na etapa13. A correção passou em 24 testes offline, mas a
+verificação real direcionada foi interrompida por HTTP500 do backend Spark. T016 permanece aberto.
+Ver [relatório, evidências preservadas e reprodução](spark-validation.md).

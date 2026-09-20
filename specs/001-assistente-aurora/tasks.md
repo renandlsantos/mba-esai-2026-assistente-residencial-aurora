@@ -30,9 +30,12 @@ cenários críticos devem usar SQLite real. Testes de modelo falso não validam 
 ## Phase 7: External acceptance validation
 
 Os itens anteriores comprovam implementação e execução offline. A entrega acadêmica continua
-pendente até executar o fluxo de linguagem natural com o provedor real.
+separada da validação funcional: o provedor escolhido diverge do enunciado original.
 
 - [ ] T016 Executar os 15 passos funcionais do avaliador com Spark real, conforme preferência do autor; registrar modelo, resultados e eventos sem segredos. A divergência do requisito Gemini deve permanecer declarada.
+  Rodada integral: 41 chamadas/109 checks; revisão identificou leitura pelo histórico na etapa13.
+  Correção offline validada; rerun direcionado bloqueado por HTTP500 do Spark. Evidência e
+  próximos comandos: [validação](../../docs/spark-validation.md). Não fechar por checks parciais.
 
 ## Phase 8: Optional local development provider
 

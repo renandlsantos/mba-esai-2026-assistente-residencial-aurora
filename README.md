@@ -9,7 +9,9 @@ usam ADK real com modelo roteirizado somente nos testes; há também smoke com S
 **Decisão de implementação:** Spark substitui Gemini como padrão por solicitação do autor.
 O enunciado original exige Gemini; essa é uma divergência documentada, sem alegação de
 aprovação da instituição. A alternativa Gemini permanece selecionável explicitamente.
-Ainda falta executar o roteiro completo de 15 passos com Spark; o smoke realizado é parcial.
+O roteiro de 15 passos foi executado com Spark; a revisão revelou leitura pelo histórico,
+agora corrigida e coberta por regressão offline. A revalidação real direcionada está pendente
+após HTTP 500 do backend Spark. [Resultado e limites](docs/spark-validation.md).
 
 ## Arquitetura
 
@@ -33,6 +35,10 @@ flowchart TD
 - [`src/aurora/agents.py`](src/aurora/agents.py), `build_app`: principal e três especialistas;
   leitura/escrita exclusivamente por ferramentas. `FunctionTool` exige confirmação conforme taxa
   da área ou sempre para visitantes. `App` habilita `ResumabilityConfig`.
+  O contexto do modelo inclui apenas o turno atual (`include_contents="none"`), para não reutilizar
+  dados antigos. `session_identity` fornece a unidade autenticada; o controle permanece nas tools.
+  Os eventos completos continuam persistidos. Novos pedidos devem explicitar seus dados;
+  referências vagas a turnos anteriores podem exigir esclarecimento.
 - [`src/aurora/runtime.py`](src/aurora/runtime.py), `Runtime`: `DatabaseSessionService` e `Runner`;
   namespace `app_name=aurora`, `user_id=session_id`. Recompõe pendências dos eventos persistidos,
   não de uma lista em memória. A resposta de confirmação leva o ID nativo e a invocação original.
@@ -139,8 +145,10 @@ uv run --no-editable pytest -q
 
 Os testes de HTTP abrem apenas processos próprios em portas efêmeras e os encerram ao terminar.
 As chamadas do modelo de teste são roteirizadas: comprovam código/ADK/SQL, não interpretação de
-linguagem natural. Rodar os 15 passos do avaliador com Spark e registrar seus resultados
-continua pendente. A diferença em relação ao provedor exigido no enunciado permanece declarada. Referências técnicas:
+linguagem natural. A rodada inicial Spark teve 41 chamadas e 109 checks positivos, mas revelou
+uma leitura de reservas pelo histórico. A correção passou em 24 testes; sua revalidação real
+está pendente por HTTP 500 do Spark. [Evidências](docs/spark-validation.md).
+A diferença em relação ao provedor exigido no enunciado permanece declarada. Referências técnicas:
 [confirmação nativa ADK](https://adk.dev/tools-custom/confirmation/),
 [Google ADK no PyPI](https://pypi.org/project/google-adk/2.9.2/).
 
@@ -175,4 +183,5 @@ AURORA_MODEL_PROVIDER=spark uv run --no-editable python scripts/smoke_spark.py \
 
 Em 20/09/2026, o smoke passou com **11 chamadas reais**, reserva gratuita, cobrança pendente,
 aprovação após reinicializar o runtime, replay 409 e isolamento. [Evidência](docs/spark-smoke.json)
-e [limites do experimento](docs/spark-experimental.md). O roteiro completo Spark permanece pendente em T016.
+e [limites do experimento](docs/spark-experimental.md). A validação posterior está em
+[spark-validation.md](docs/spark-validation.md); T016 permanece aberto para a correção ainda sem rerun real concluído.
