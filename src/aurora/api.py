@@ -5,7 +5,8 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 
 from .config import Settings
-from .runtime import ModelConfigurationError, Runtime
+from .models import ModelConfigurationError
+from .runtime import Runtime
 
 
 class Request(BaseModel):

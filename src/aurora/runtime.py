@@ -1,5 +1,4 @@
 import asyncio
-import os
 from collections import defaultdict
 from uuid import uuid4
 
@@ -10,11 +9,8 @@ from google.genai import types
 
 from .agents import build_app
 from .config import Settings
+from .models import configured_model
 from .store import Store
-
-
-class ModelConfigurationError(RuntimeError):
-    pass
 
 
 class Runtime:
@@ -32,11 +28,7 @@ class Runtime:
         if self.runner is None:
             model = self.model
             if model is None:
-                model = os.getenv("GEMINI_MODEL")
-                if not model or not os.getenv("GOOGLE_API_KEY"):
-                    raise ModelConfigurationError(
-                        "Configure GOOGLE_API_KEY e GEMINI_MODEL para conversar."
-                    )
+                model = configured_model()
             self.runner = Runner(
                 app=build_app(self.store, self.settings, model),
                 session_service=self.sessions,

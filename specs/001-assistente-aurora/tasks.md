@@ -33,3 +33,8 @@ Os itens anteriores comprovam implementação e execução offline. A entrega ac
 pendente até executar o fluxo de linguagem natural com o provedor real.
 
 - [ ] T016 Executar os 15 passos do avaliador com Gemini real e credenciais locais autorizadas; registrar modelo, resultados e eventos verificáveis em docs/validacao-gemini.md sem segredos.
+
+## Phase 8: Optional local development provider
+
+- [x] T017 Especificar e implementar Spark experimental conforme [spark-experimental.md](spark-experimental.md), mantendo Gemini default e T016 aberto.
+- [x] T018 Validar adapter via transporte HTTP de teste com ADK/SQLite reais e smoke Spark autorizado em bases temporárias; registrar docs/spark-smoke.json.

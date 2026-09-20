@@ -20,5 +20,5 @@ def main():
             "Restaurados exclusivamente .runtime/aurora/domain.sqlite3 e adk.sqlite3. Sessões removidas."
         )
         return
-    load_dotenv()
+    load_dotenv(settings.root / ".env")
     uvicorn.run(create_app(settings), host="127.0.0.1", port=8000)

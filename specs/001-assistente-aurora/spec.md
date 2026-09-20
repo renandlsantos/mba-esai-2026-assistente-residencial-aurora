@@ -50,6 +50,9 @@ Falhas externas de modelo são explícitas, sem respostas simuladas.
 - FR-008: Manter dados/ intacto e restauração reproduzível restrita aos bancos próprios.
 - FR-009: Principal e pelo menos dois especialistas devem operar via ferramentas.
 - FR-010: Documentar instalação limpa, arquitetura, garantias e limites de validação.
+- FR-011 (desenvolvimento opcional): aceitar Spark local somente por seleção explícita,
+  mantendo Gemini como padrão/aceite, o mesmo contrato e as mesmas garantias de domínio.
+  Credenciais ficam fora de eventos/artefatos; resposta inválida não executa ferramentas.
 
 ### Key Entities
 Sessão: identidade e apartamento. Confirmação: decisão pendente vinculada à sessão e chamada.
@@ -69,3 +72,6 @@ Evento: histórico ordenado da interação. Capítulo: trecho isolado do regulam
 Autenticação, pagamentos reais, UI, deploy e horários/capacidade de reservas estão fora de escopo.
 Chave e disponibilidade Gemini pertencem ao ambiente do operador; execução real fica pendente
 até credenciais autorizadas. Testes offline verificam garantias usando modelo de teste explícito.
+
+O modo adicional FR-011 e seus testes estão em [spark-experimental.md](spark-experimental.md).
+Seu smoke usa linguagem natural real, mas não conclui SC-001–SC-006 com Gemini nem T016.

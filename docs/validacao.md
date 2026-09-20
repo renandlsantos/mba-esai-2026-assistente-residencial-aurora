@@ -56,3 +56,10 @@ de restore foi executado em diretório temporário exclusivo, seguido de aurora 
 127.0.0.1:8000: dados iniciais do 101 e visitante do 302 corretos, criação de sessão HTTP 201.
 Nenhuma chamada de modelo real foi feita. Arquivos dados/ idênticos ao upstream be87e1d.
 A tarefa externa T016 torna explícita a pendência dos 15 passos com Gemini antes da liberação.
+
+## Spark opcional — 2026-09-20
+
+23 testes offline passaram após a extensão experimental (14 existentes e nove do adapter).
+Smoke real autorizado com spark/code passou em 11 chamadas, bancos temporários e runtime
+reinicializado antes da aprovação. Ver [registro completo](spark-experimental.md) e
+[resultado estruturado](spark-smoke.json). O teste não substitui os 15 passos com Gemini.

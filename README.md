@@ -3,7 +3,8 @@
 Desafio 309 do MBA em Engenharia de Software com IA. API local com Google ADK 2.9.2,
 Gemini configurável e dados persistentes. O consentimento e as regras de negócio são
 verificados em código. **Testes offline usam ADK real e modelo roteirizado somente nos testes;
-a execução com Gemini real ainda não foi realizada.**
+a execução com Gemini real ainda não foi realizada.** Spark local é uma opção experimental
+de desenvolvimento, validada separadamente; não substitui o Gemini exigido pelo enunciado.
 
 ## Arquitetura
 
@@ -133,3 +134,36 @@ linguagem natural do Gemini. Rodar os 15 passos do avaliador com Gemini e regist
 continua pendente de credenciais e execução real. Referências técnicas:
 [confirmação nativa ADK](https://adk.dev/tools-custom/confirmation/),
 [Google ADK no PyPI](https://pypi.org/project/google-adk/2.9.2/).
+
+### Spark local experimental
+
+O padrão continua Gemini quando `AURORA_MODEL_PROVIDER` está ausente ou vazio. Para usar
+explicitamente o servidor Spark local configurado em seu ambiente:
+
+```bash
+AURORA_MODEL_PROVIDER=spark uv run --no-editable aurora start
+```
+
+Somente nesse modo, `SPARK_BASE_URL` e `SPARK_API_KEY` são lidos do ambiente ou de
+`~/.config/spark/spark-api.env`. `SPARK_ENV_FILE` permite selecionar outro dotenv local;
+valores do ambiente têm prioridade. O arquivo deve apontar para a base OpenAI compatível
+do servidor autorizado, normalmente terminando em `/v1`. Não copie sua chave para o repositório.
+O CLI lê apenas o `.env` da raiz atual, sem procurar arquivos ancestrais.
+
+[`src/aurora/models.py`](src/aurora/models.py) seleciona o provedor e
+[`src/aurora/spark.py`](src/aurora/spark.py) implementa um adapter `BaseLlm` limitado a texto
+e chamadas nativas de ferramentas. Usa `spark/code`, `max_tokens=4096`, timeout de 300 segundos,
+sem streaming, retry automático, fallback para nuvem ou leitura de raciocínio interno.
+IDs e resultados de tools passam pelo ADK; confirmação e regras continuam nas mesmas camadas.
+O adapter usa `httpx`, dependência já presente e agora declarada em runtime. Não adiciona LiteLLM.
+
+Smoke real opt-in, com cópia temporária dos dados públicos e no máximo 15 chamadas sequenciais:
+
+```bash
+AURORA_MODEL_PROVIDER=spark uv run --no-editable python scripts/smoke_spark.py \
+  --output .runtime/spark-smoke.json
+```
+
+Em 20/09/2026, o smoke passou com **11 chamadas reais**, reserva gratuita, cobrança pendente,
+aprovação após reinicializar o runtime, replay 409 e isolamento. [Evidência](docs/spark-smoke.json)
+e [limites do experimento](docs/spark-experimental.md). O aceite Gemini permanece pendente em T016.

@@ -17,3 +17,10 @@ docs/validacao.md; specs/001-assistente-aurora/{research,data-model,quickstart,t
 ## Complexity Tracking
 Dois bancos: domínio transacional e sessões ADK. Separação evita acoplamento ao schema privado
 ADK; apenas arquivos de nome fixo em diretório próprio são restaurados.
+
+## Extensão experimental — 2026-09-20
+
+Plano revisado antes de implementação em [spark-experimental.md](spark-experimental.md).
+Adicionar models.py para seleção explícita e spark.py para BaseLlm texto/tools via httpx;
+nenhuma mudança nas ferramentas de negócio ou no schema. httpx passa de dev para runtime,
+sem novos pacotes no lock. Gemini continua obrigatório para T016.
