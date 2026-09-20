@@ -27,6 +27,9 @@ continua declarada. Não se reivindica aceite institucional, merge ou submissão
   disponíveis pela API. Uma reserva removida entre leituras não reaparece no resultado.
 - Suíte local após a correção: **24 testes passaram**, quatro avisos upstream
   (depreciação e recursos experimentais do ADK). Ruff e formatação verificados.
+- [Clone limpo do commit 06bc09d](spark-context-clone.json): instalação frozen/offline,
+  24 testes, restore e boot pelo CLI em 127.0.0.1:8000; dados iniciais e sessão201 corretos,
+  fontes intactas, checkout limpo e processo encerrado. Nenhuma chamada ao modelo.
 - [Comparação do primeiro request](spark-request-comparison.json), sem chamadas reais:
   payload capturado pelo SDK antes/depois idêntico exceto a identidade confiável acrescentada
   ao sistema. Isso descarta mudança de roles, schema ou parâmetros como causa desse 500;
